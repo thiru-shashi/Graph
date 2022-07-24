@@ -1,0 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DFS;
+import java.util.*;
+
+/**
+ *
+ * @author Thiru_Shashi
+ */
+
+
+class DFS {
+  private LinkedList<Integer> adjacency[];
+  private boolean visited[];
+
+  // Graph creation
+  DFS(int vertices) {
+    adjacency = new LinkedList[vertices];
+    visited = new boolean[vertices];
+
+    for (int i = 0; i < vertices; i++)
+      adjacency[i] = new LinkedList<Integer>();
+  }
+
+  // Add edges
+  void addEdge(int src, int dest) {
+    adjacency[src].add(dest);
+  }
+
+  // DFS algorithm
+  void DFS(int vertex) {
+    visited[vertex] = true;
+    System.out.print(vertex + " ");
+
+    Iterator<Integer> i = adjacency[vertex].listIterator();
+    while (i.hasNext()) {
+      int adj = i.next();
+      if (!visited[adj])
+        DFS(adj);
+    }
+  }
+
+  public static void main(String args[]) {
+    DFS g = new DFS(5);
+
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 3);
+    g.addEdge(2, 4);
+
+    System.out.println("This is DFS");
+
+    g.DFS(2);
+  }
+}
